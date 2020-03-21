@@ -1,20 +1,53 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title>
-      Blank
+      Covid-19
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button >
+        <ion-icon size="large" name="menu-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header >
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Base de datos en tiempo real covid-19</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="container">
+    <ion-card *ngIf="cases">
+      <ion-card-header>
+        <ion-card-title style="color:red">Fallecimientos confirmados</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+       <ion-label>{{cases.total_recovered}}</ion-label>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title style="color:aqua">Total infectados</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        Keep close to Nature's heart... and break clear away, once in awhile,
+        and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title style="color: chartreuse;">Total recuperados</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        Keep close to Nature's heart... and break clear away, once in awhile,
+        and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      </ion-card-content>
+    </ion-card>
   </div>
+  <ion-button color="primary" (click)="refreshCases()">
+    Refrescar
+  </ion-button>
 </ion-content>
