@@ -1,9 +1,22 @@
-
-.container {
-  text-align: center;
-  display: flex;
+.advert{
+  font-family: digital;
 }
 
-ion-content ion-toolbar {
-  --background: translucent;
+.cards-container {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cards-container *{
+  flex: auto;
+  font-size: 50px;
+}
+
+.countryList{
+  border-radius: 15px;
+}
+
+.countryListItem{
+  border-radius: 15px;
 }
