@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
     this.translate.get('TITLE').subscribe(res => {
       this.titletl = res;
     }
-    )
+    );
     this.covid19Helper.getCovid19CasesByCountrySpain().then(res => {
       return this.casesSpain = res;
     });
