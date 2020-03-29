@@ -1,58 +1,67 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>
+  <ion-toolbar class="toolbar-header">
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-icon size="large" name="menu"></ion-icon>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title style="font-size: 30px;" slot="end">
       Covid-19
     </ion-title>
-    <ion-buttons slot="primary">
-      <ion-button>
-        <ion-icon size="large" name="menu-sharp"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
+  <div class="" *ngIf="casesSpain">
+    <p style="font-size: 30px;margin: 12px;white-space: nowrap;">{{'TITLE' | translate}}
+      {{currentTime | date: 'dd MMMM yyy  HH:mm:SS'}}</p>
+    <p style="font-size: 30px;margin: 12px;"> {{ casesSpain.record_date | date:'dd MMM yyy  HH:mm:SS' }} </p>
+  </div>
 </ion-header>
 
-<ion-content class="content" *ngIf="casesSpain">
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content refreshingText="Refreshing..."></ion-refresher-content>
-  </ion-refresher>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title class="CurrentTime"> {{currentTime | date: 'EEEE dd MMMM yyy  HH:mm:SS'}}
-      </ion-title>
-      <ion-title size="large" class="advert"> {{ titletl }} {{ casesSpain.record_date | date:'EEEE, dd MMM yyy  HH:mm:SS' }}
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div class="cards-container">
-    <ion-card class="ion-card-size">
-      <ion-card-header>
-        <ion-card-title style="color:aqua">Total infectados</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-label>{{casesSpain.total_cases}}</ion-label>
-      </ion-card-content>
-    </ion-card>
-    <ion-card class="ion-card-size">
-      <ion-card-header>
-        <ion-card-title style="color: chartreuse;">Total recuperados</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-label>{{casesSpain.total_recovered}}</ion-label>
-      </ion-card-content>
-    </ion-card>
-    <ion-card class="ion-card-size">
-      <ion-card-header>
-        <ion-card-title style="color:red">Total fallecidos</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-label>{{ casesSpain.total_deaths }}</ion-label>
-      </ion-card-content>
-    </ion-card>
-  </div>
+<ion-content id="main" class="content" *ngIf="casesSpain">
+  <ion-grid>
 
-  <ion-list class="countryList">
-    <ion-item *ngFor="let country of casesCovid19" class="countryListItem">
-      <div>{{country.country_name}}</div>
-    </ion-item>
-  </ion-list>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content refreshingText="Refreshing..."></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-row class="cards-container">
+      <ion-card class="ion-card-inner">
+        <ion-card-header>
+          <ion-card-title class="title-card-infected">Total infectados</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="card-div">{{casesSpain.total_cases}}</div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="ion-card-inner">
+        <ion-card-header>
+          <ion-card-title class="title-card-recovered">Total recuperados</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="card-div">{{casesSpain.total_recovered}}</div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="ion-card-inner">
+        <ion-card-header>
+          <ion-card-title class="title-card-death">Total fallecidos</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="card-div">{{ casesSpain.total_deaths }}</div>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list class="countryList">
+          <ion-item lines="none" *ngFor="let country of casesCovid19" class="countryListItem">
+            <div>
+              <div><strong>Country</strong>{{country.country_name}} </div>
+              <div><strong> Total cases</strong> {{country.cases}}</div>
+              <div><strong>Total recovered</strong> {{country.total_recovered}}</div>
+              <div> <strong>Total deaths</strong> {{country.deaths}}</div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

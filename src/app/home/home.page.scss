@@ -1,5 +1,13 @@
-.advert{
-  font-family: digital;
+$fontsize: 35px;
+$fontfamily: Arial, Helvetica, sans-serif;
+$mojito: -webkit-linear-gradient(#1d976c, #93f9b9);
+//-webkit-text-fill-color: transparent;
+*body{
+  --ion-background-color: linear-gradient(to right, #1d976c, #93f9b9 );
+}
+.toolbar-header{
+  --background: #1d976c;
+  color: white;
 }
 
 .cards-container {
@@ -8,15 +16,38 @@
   justify-content: space-between;
 }
 
-.cards-container *{
-  flex: auto;
+.card-div{
   font-size: 50px;
+  background: $mojito;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+.title-card-infected{
+  font-family: $fontfamily;
+  font-size: $fontsize;
+}
+.title-card-recovered{
+  font-family: $fontfamily;
+  font-size: $fontsize;
+}
+.title-card-death{
+  font-family: $fontfamily;
+  font-size: $fontsize;
+}
+
 
 .countryList{
-  border-radius: 15px;
+  border: 2px solid gray;
+  border-radius: 25px;
+}
+.countryList :nth-child(2n+0) {
+  --ion-item-background:#f1f1f1;
+}
+.countryListItem :only-child{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
 }
 
-.countryListItem{
-  border-radius: 15px;
-}

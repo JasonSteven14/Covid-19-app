@@ -1,12 +1,8 @@
 import { Component, OnInit, ModuleWithComponentFactories } from '@angular/core';
 import { Covid19HelperService } from '../services/covid-19-helper.service';
 import { CovidCases } from '../interfaces/covid-cases';
-import { interval, Observable,  } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { HttpErrorResponse } from '@angular/common/http';
-
-
+import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -14,7 +10,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class HomePage implements OnInit {
 
-  time = new Date().toUTCString();
+  time = new Date();
+  options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   public currentTime = this.time;
   casesSpain: CovidCases;
   casesCovid19: CovidCases;
@@ -22,23 +19,18 @@ export class HomePage implements OnInit {
 
   constructor(
     private covid19Helper: Covid19HelperService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
+    console.log(this.time.toLocaleString('es-ES', this.options));
    }
 
   ngOnInit() {
-
-    this.translate.get('TITLE').subscribe(res => {
-      this.titletl = res;
-    }
-    );
     this.covid19Helper.getCovid19CasesByCountrySpain().then(res => {
       return this.casesSpain = res;
     });
     this.covid19Helper.getCasesByCountry().then(res => {
       this.casesCovid19 = res;
+      console.log(res);
     });
   }
 
@@ -46,9 +38,9 @@ export class HomePage implements OnInit {
     this.covid19Helper.getCovid19CasesByCountrySpain().then(
       res => {
         this.casesSpain = res;
+        console.log(res);
         event.target.complete();
       }
     );
   }
-
 }
