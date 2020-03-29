@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,12 +15,18 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private menuController: MenuController
   ) {
-    this.initializeApp();
     this.translate.setDefaultLang('en');
     this.translate.use('en');
+    this.initializeApp();
   }
+  irst() {
+    this.menuController.enable(true, 'menu');
+    this.menuController.open('menu');
+  }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
